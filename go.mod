@@ -7,5 +7,5 @@ require (
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/joho/godotenv v1.4.0 // indirect
 	github.com/serqol/go-pool v0.0.0-20220308145503-f6b125452f87 // indirect
-	github.com/serqol/go-utils v0.0.0-20220308153422-216e7f0d8365 // indirect
+	github.com/serqol/go-utils v0.0.0-20220309093932-3db250c20574 // indirect
 )

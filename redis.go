@@ -127,7 +127,10 @@ func connectorFunction() func() (interface{}, error) {
 
 func GetConnector() *connection.Connector {
 	once.Do(func() {
-		connector = connection.GetConnector(connectorFunction(), nil, 4, 200, 3600)
+		minActive := utils.GetEnvPositiveInt("REDIS_MIN_ACTIVE", 4)
+		maxActive := utils.GetEnvPositiveInt("REDIS_MAX_ACTIVE", 200)
+		maxIdleSeconds := utils.GetEnvPositiveInt("REDIS_MAX_IDLE", 3600)
+		connector = connection.GetConnector(connectorFunction(), nil, uint8(minActive), uint16(maxActive), uint16(maxIdleSeconds))
 	})
 	return connector
 }

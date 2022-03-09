@@ -8,3 +8,7 @@ github.com/serqol/go-pool v0.0.0-20220308145503-f6b125452f87 h1:FZpDGIj/9Mh5fVUl
 github.com/serqol/go-pool v0.0.0-20220308145503-f6b125452f87/go.mod h1:I6AQY18+TIgx8UfWRJhW+Z9NsrLf0ISwyXyyljPGjC0=
 github.com/serqol/go-utils v0.0.0-20220308153422-216e7f0d8365 h1:clYUWoIRaLrne7vGzUA0xZ6tVWa1r1tf4SVDjBT+Mao=
 github.com/serqol/go-utils v0.0.0-20220308153422-216e7f0d8365/go.mod h1:NC2tgUIQYMrMTbLyoHc3Chr5whT1qY77dOU4CSRrbrE=
+github.com/serqol/go-utils v0.0.0-20220309093735-3a2365d33c92 h1:b9RxricmjjIrY6lnBrKVY0JpHKtX5GJP4OY+9j4jO10=
+github.com/serqol/go-utils v0.0.0-20220309093735-3a2365d33c92/go.mod h1:NC2tgUIQYMrMTbLyoHc3Chr5whT1qY77dOU4CSRrbrE=
+github.com/serqol/go-utils v0.0.0-20220309093932-3db250c20574 h1:KuBfYwOOa0r8ZsmzRk4dKgtH/haD03g6yTOW9yI4rB8=
+github.com/serqol/go-utils v0.0.0-20220309093932-3db250c20574/go.mod h1:NC2tgUIQYMrMTbLyoHc3Chr5whT1qY77dOU4CSRrbrE=
