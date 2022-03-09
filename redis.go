@@ -21,7 +21,7 @@ func init() {
 	utils.LoadEnv()
 }
 
-func Get(name string) string {
+func Get(name string) (string, error) {
 	result, error := GetConnector().Execute(func(connection interface{}) (interface{}, error) {
 		result, error := connection.(*redis.Client).Get(name).Result()
 		return result, processError(error)
@@ -29,20 +29,22 @@ func Get(name string) string {
 
 	if error != nil {
 		fmt.Print(error)
-		return ""
+		return "", error
 	}
 
-	return result.(string)
+	return result.(string), nil
 }
 
-func Set(name string, value string, ttl time.Duration) {
+func Set(name string, value string, ttl time.Duration) error {
 	_, error := GetConnector().Execute(func(connection interface{}) (interface{}, error) {
 		return connection.(*redis.Client).Set(name, value, ttl).Result()
 	})
 
 	if error != nil {
 		fmt.Print(error)
+		return error
 	}
+	return nil
 }
 
 func GenerateUniqueKey(value interface{}, ttl time.Duration, prefix string) (string, error) {
@@ -61,40 +63,43 @@ func GenerateUniqueKey(value interface{}, ttl time.Duration, prefix string) (str
 	return "", errors.New("failed to generate unique uuid")
 }
 
-func StoreObject(name string, ttl time.Duration, object interface{}) {
+func StoreObject(name string, ttl time.Duration, object interface{}) error {
 	objectBytes, error := json.Marshal(object)
 
 	if error != nil {
 		fmt.Print(error)
-		return
+		return error
 	}
 
 	Set(name, string(objectBytes), ttl)
+	return nil
 }
 
-func GetObject(name string, object interface{}) interface{} {
-	raw := Get(name)
+func GetObject(name string, object interface{}) (interface{}, error) {
+	raw, _ := Get(name)
 	if raw == "" {
-		return nil
+		return nil, errors.New("object not found by key: " + name)
 	}
 	error := json.Unmarshal([]byte(raw), &object)
 
 	if error != nil {
 		fmt.Print(error)
-		return nil
+		return nil, error
 	}
 
-	return object
+	return object, nil
 }
 
-func Delete(key string) {
+func Delete(key string) error {
 	_, error := GetConnector().Execute(func(connection interface{}) (interface{}, error) {
 		return connection.(*redis.Client).Del(key).Result()
 	})
 
 	if error != nil {
 		fmt.Print(error)
+		return error
 	}
+	return nil
 }
 
 func processError(errorObj error) error {
